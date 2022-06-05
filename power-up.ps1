@@ -83,3 +83,9 @@ Enable-WindowsOptionalFeature -Online -FeatureName IIS-ASPNET45
 
 # Disable Loopback Check on a Server - to get around no local Logins on Windows Server
 # New-ItemProperty HKLM:\System\CurrentControlSet\Control\Lsa -Name "DisableLoopbackCheck" -Value "1" -PropertyType dword
+#Disabe Windows updates
+sc.exe config wuauserv start= disabled
+sc.exe stop wuauserv
+sc.exe start wuauserv
+Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name NoAutoUpdate -Value 1
+
