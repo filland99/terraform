@@ -88,4 +88,5 @@ sc.exe config wuauserv start= disabled
 sc.exe stop wuauserv
 sc.exe start wuauserv
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name NoAutoUpdate -Value 1
-
+#format all disks to all size
+Get-Disk | Where partitionstyle -eq ‘raw’ | Initialize-Disk -PartitionStyle MBR -PassThru | New-Partition -AssignDriveLetter -UseMaximumSize | Format-Volume -FileSystem NTFS
