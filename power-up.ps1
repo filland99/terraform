@@ -6,8 +6,8 @@ Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server' 
 
 #Create User and Add to Local Administrator Group
 $password = ConvertTo-SecureString 'fiVvH_7HCCYZvXed' -AsPlainText -Force
-new-localuser -Name comexas_admin -Password $password
-add-localgroupmember -Group administrators -Member comexas_admin
+new-localuser -Name admin -Password $password
+add-localgroupmember -Group administrators -Member admin
  
 #Add-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0
 #New-ItemProperty -Path "HKLM:\SOFTWARE\OpenSSH" -Name DefaultShell -Value "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -PropertyType String -Force
@@ -73,7 +73,7 @@ Set-ExecutionPolicy Bypass -Scope Process
 # Chocolatey OR Web Platform Installer to install
 
 #Set timezone Europe/Brussels
-Set-TimeZone –Name "Romance Standard Time"
+Set-TimeZone -Name "Romance Standard Time"
 
 # Install UrlRewrite Module for Extensionless Urls (optional)
 ###  & "C:\Program Files\Microsoft\Web Platform Installer\WebpiCmd-x64.exe" /install /Products:UrlRewrite2 /AcceptEULA /SuppressPostFinish
@@ -91,4 +91,4 @@ sc.exe stop wuauserv
 sc.exe start wuauserv
 Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name NoAutoUpdate -Value 1
 #format all disks to all size
-Get-Disk | Where partitionstyle -eq 'raw' | Initialize-Disk -PartitionStyle MBR -PassThru | New-Partition -AssignDriveLetter -UseMaximumSize | Format-Volume -FileSystem NTFS
+Get-Disk | Where-Object partitionstyle -eq 'raw' | Initialize-Disk -PartitionStyle MBR -PassThru | New-Partition -AssignDriveLetter -UseMaximumSize | Format-Volume -FileSystem NTFS
