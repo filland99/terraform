@@ -6,8 +6,8 @@ Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server' 
 
 #Create User and Add to Local Administrator Group
 $password = ConvertTo-SecureString 'fiVvH_7HCCYZvXed' -AsPlainText -Force
-new-localuser -Name admin -Password $password
-add-localgroupmember -Group administrators -Member admin
+new-localuser -Name comexas_admin -Password $password
+add-localgroupmember -Group administrators -Member comexas_admin
  
 #Add-WindowsCapability -Online -Name OpenSSH.Server~~~~0.0.1.0
 #New-ItemProperty -Path "HKLM:\SOFTWARE\OpenSSH" -Name DefaultShell -Value "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -PropertyType String -Force
