@@ -86,10 +86,10 @@ Set-TimeZone -Name "Romance Standard Time"
 # Disable Loopback Check on a Server - to get around no local Logins on Windows Server
 # New-ItemProperty HKLM:\System\CurrentControlSet\Control\Lsa -Name "DisableLoopbackCheck" -Value "1" -PropertyType dword
 #Disabe Windows updates
-sc.exe config wuauserv start= disabled
-sc.exe stop wuauserv
-sc.exe start wuauserv
-Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name NoAutoUpdate -Value 1
+#sc.exe config wuauserv start= disabled
+#sc.exe stop wuauserv
+#sc.exe start wuauserv
+#Set-ItemProperty -Path "HKLM:\SOFTWARE\Policies\Microsoft\Windows\WindowsUpdate\AU" -Name NoAutoUpdate -Value 1
 #resize drives
 Resize-Partition -DriveLetter C -Size $(Get-PartitionSupportedSize -DriveLetter C).SizeMax
 #format all disks to all size
