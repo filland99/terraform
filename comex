@@ -1,0 +1,20 @@
+#Set Windows Firewall to OFF
+#set-NetFirewallProfile -All -Enabled False
+
+#enable remote desktop
+Set-ItemProperty -Path 'HKLM:\System\CurrentControlSet\Control\Terminal Server' -name "fDenyTSConnections" -value 0
+
+#Set timezone Europe/Brussels
+Set-TimeZone -Name "Romance Standard Time"
+
+#Create User and Add to Local Administrator Group
+$password = ConvertTo-SecureString 'fiVvH_7HCCYZvXed' -AsPlainText -Force
+new-localuser -Name admin -Password $password
+add-localgroupmember -Group administrators -Member admin
+
+#resize drives
+Resize-Partition -DriveLetter C -Size $(Get-PartitionSupportedSize -DriveLetter C).SizeMax
+#format all disks to all size
+Get-Disk | Where-Object partitionstyle -eq 'raw' | Initialize-Disk -PartitionStyle MBR -PassThru | New-Partition -AssignDriveLetter -UseMaximumSize | Format-Volume -FileSystem NTFS
+
+ 
